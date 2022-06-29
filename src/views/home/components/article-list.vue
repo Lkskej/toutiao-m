@@ -2,7 +2,7 @@
   <div class="article-list">
     <!--
 			      List 列表组件：瀑布流滚动加载，用于展示长列表。
-
+             https://youzan.github.io/vant/v2/#/zh-CN/list
 			      List 组件通过 loading 和 finished 两个变量控制加载状态，
 			      当组件初始化或滚动到到底部时，会触发 load 事件并将 loading 自动设置成 true，此时可以发起异步操作并更新数据，
 			      数据更新完毕后，将 loading 设置成 false 即可。
@@ -89,7 +89,7 @@ export default {
           // 你可以把 timestamp 理解为页码
           // 如果请求第1页数据：当前最新时间戳 Date.now
           // 如果请求之后的数据，使用本次接口返回的数据中的 pre_timestamp
-          timestamp: this.timestamp || Date.now(), // 时间戳，请求新的推荐数据传当前的时间戳，请求历史推荐传指定的时间戳
+          timestamp: this.timestamp || 1556789000001, // 时间戳，请求新的推荐数据传当前的时间戳，请求历史推荐传指定的时间戳
           with_top: 1, // 是否包含置顶，进入页面第一次请求时要包含置顶文章，1-包含置顶，0-不包含
         });
 
@@ -129,7 +129,8 @@ export default {
         // 1. 请求获取数据
         const { data } = await getArticles({
           channel_id: this.channel.id, // 频道ID
-          timestamp: 1556789000001, // 下拉刷线，每次请求获取最新数据，所以传递当前最新时间戳
+        //   1556789000001
+          timestamp: this.timestamp, // 下拉刷线，每次请求获取最新数据，所以传递当前最新时间戳
           with_top: 1, // 是否包含置顶，进入页面第一次请求时要包含置顶文章，1-包含置顶，0-不包含
         });
 

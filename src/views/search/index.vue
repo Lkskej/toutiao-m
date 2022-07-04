@@ -56,6 +56,7 @@ export default {
   props: {},
   data() {
     return {
+      // 输入的内容
       searchText: "",
       isResultShow: false, // 控制搜索结果的展示
       searchHistories: getItem("TOUTIAO_SEARCH_HISTORIES") || [], // 搜索的历史记录数据
@@ -64,6 +65,7 @@ export default {
   computed: {},
   watch: {
     searchHistories(value) {
+      console.log(value);
       setItem("TOUTIAO_SEARCH_HISTORIES", value);
     },
     // searchHistories: {
@@ -82,6 +84,10 @@ export default {
       const index = this.searchHistories.indexOf(val);
       if (index !== -1) {
         this.searchHistories.splice(index, 1);
+      } //数组长度大于10删除最后一位,再添加新的记录
+
+      if (this.searchHistories.length >= 10) {
+        this.searchHistories.splice(this.searchHistories.length - 1, 1);
       }
       this.searchHistories.unshift(val);
 
@@ -95,7 +101,6 @@ export default {
   },
 };
 </script>
-
 		<style scoped lang="less">
 .search-container {
   padding-top: 108px;

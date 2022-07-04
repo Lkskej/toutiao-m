@@ -61,17 +61,16 @@ export default {
         this.loading = false;
 
         // 4. 判断是否还有数据
-        if (results.length) {
+        if (this.list.length >= 30) {
           // 如果有，则更新获取下一个数据的页码
-          this.page++;
+          //   this.page++;
+          this.finished = true;
         } else {
           // 如果没有，则将加载状态 finished 设置为结束
-          this.finished = true;
         }
       } catch (err) {
         // 展示加载失败的提示状态
         this.error = true;
-
         // 加载失败了 loading 也要关闭
         this.loading = false;
       }
